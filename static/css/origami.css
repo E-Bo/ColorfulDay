@@ -1,0 +1,137 @@
+@charset "UTF-8";
+/* CSS Document */
+.origami {
+	position: relative;
+	width: 320px;
+	height: 240px;
+	z-index: 10;
+	cursor: pointer;
+}
+.origami .kami-wrapper {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+.kami-wrapper{
+	z-index: 10;
+	perspective: 1240px;
+	-webkit-perspective: 1240px;
+	transition: z-index 0s 175ms;
+	-webkit-transition: z-index 0s 175ms;
+}
+.kami-wrapper.on-top{
+	z-index:20;
+}
+.origami .kami-wrapper .kami-mask, .origami .kami-wrapper .kami-peek-mask {
+	position: absolute;
+	width: 50%;
+	top: 0;
+	bottom: 0;
+	overflow: hidden;
+}
+.origami.rolling-over .kami-wrapper .kami-mask, .origami.rolling-over .kami-wrapper .kami-peek-mask{
+	overflow: visible;
+	display:none;
+}
+.origami.rolling-over .kami-wrapper .kami-mask.animation, .origami.rolling-over .kami-wrapper .kami-peek-mask.animation{
+	display:block;
+}
+.origami .kami-wrapper .kami-mask{
+	right: 50%;
+	left: 0;
+}
+.origami .kami-wrapper .kami-peek-mask {
+	right: 0;
+	left: 50%;
+}
+.origami .kami {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #f2f0eb;
+}
+.kami-mask{
+	backface-visibility: hidden;
+	transform-style: preserve-3d;
+	transform-origin: 100% 0px 0px;
+	-webkit-backface-visibility: hidden;
+	-webkit-transform-style: preserve-3d;
+	-webkit-transform-origin: 100% 0px;
+}
+.kami-mask.animation{
+	transform: rotateY(180deg);
+	-webkit-transform: rotateY(180deg);
+	transition: -webkit-transform  350ms linear;
+	-webkit-transition: -webkit-transform  350ms linear;
+}
+.on-top .kami-mask.animation{
+	transform: rotateY(0deg);
+	-webkit-transform: rotateY(0deg);
+	transition: -webkit-transform  350ms linear;
+	-webkit-transition: -webkit-transform  350ms linear;
+}
+.kami-peek-mask{
+	backface-visibility: hidden;
+	transform-style: preserve-3d;
+	transform-origin: 0px 0px 0px;
+	-webkit-backface-visibility: hidden;
+	-webkit-transform-style: preserve-3d;
+	-webkit-transform-origin: 0px 0px;
+}
+.kami-peek-mask.animation{
+	transition: -webkit-transform  350ms linear;
+	-webkit-transition: -webkit-transform  350ms linear;
+	transform: rotateY(0deg);
+	-webkit-transform: rotateY(0deg);
+}
+.on-top .kami-peek-mask.animation{
+	transition: -webkit-transform 350ms linear;
+	-webkit-transition: -webkit-transform 350ms linear;
+}
+.origami .kami-wrapper .kami-mask .kami{
+	left: 0;
+}
+.origami .kami-wrapper .kami-peek-mask .kami{
+	right: 0;
+	left: auto;
+}
+.origami .kami-wrapper .kami-mask .kami, .origami .kami-wrapper .kami-peek-mask .kami {
+	width: 200%;
+}
+.kami-shadow{
+	position: absolute;
+	display: block;
+	content: " ";
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	background: #000000;
+	transition: opacity 350ms linear;
+	-webkit-transition: opacity 350ms linear;
+	opacity: 0;
+}
+.origami.hover-active:hover .kami-wrapper, .origami.open .kami-wrapper{
+	z-index:20;
+}
+.origami.hover-active:hover .kami-wrapper.on-top, .origami.open .kami-wrapper.on-top{
+	z-index:10;
+}
+.origami.hover-active:hover .kami-shadow, .origami.open .kami-shadow{
+	opacity:0.1;
+}
+.origami.hover-active:hover .on-top .kami-peek-mask.animation, .origami.open .on-top .kami-peek-mask.animation{
+	transform: rotateY(-180deg);
+	-webkit-transform: rotateY(-180deg);
+}
+.origami.hover-active:hover .kami-mask.animation, .origami.open .kami-mask.animation{
+	transform: rotateY(0deg);
+	-webkit-transform: rotateY(0deg);
+}

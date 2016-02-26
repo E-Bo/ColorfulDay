@@ -1,0 +1,61 @@
+@font-face {
+	font-family: 'bicon';
+	src:url('../fonts/bicon.eot?-z2ojev');
+	src:url('../fonts/bicon.eot?#iefix-z2ojev') format('embedded-opentype'),
+		url('../fonts/bicon.ttf?-z2ojev') format('truetype'),
+		url('../fonts/bicon.woff?-z2ojev') format('woff'),
+		url('../fonts/bicon.svg?-z2ojev#bicon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="ficon-"], [class*=" ficon-"] {
+	font-family: 'bicon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: inherit;
+	vertical-align: top;
+	display: inline-block;
+	text-align: center;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.ficon-refresh:before {
+	content: "\e600";
+}
+.ficon-five:before {
+	content: "\35";
+}
+.ficon-comma:before {
+	content: "\2c";
+}
+.ficon-exclamdown:before {
+	content: "\a1";
+}
+.ficon-guilsinglleft:before {
+	content: "\2039";
+}
+.ficon-guilsinglright:before {
+	content: "\203a";
+}
+.ficon-quotedblleft:before {
+	content: "\201c";
+}
+.ficon-quotedblright:before {
+	content: "\201d";
+}
+.ficon-quoteleft:before {
+	content: "\2018";
+}
+.ficon-location-on:before {
+	content: "\e601";
+}
+.ficon-droplet:before {
+	content: "\e90b";
+}

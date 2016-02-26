@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>Colorful Day</title>
+    <link rel="stylesheet" type="text/css" href="static/css/weather-icon.css">
+    <link rel="stylesheet" type="text/css" href="static/css/bicon.css">
+    <link rel="stylesheet" type="text/css" href="static/css/app.css">
+</head>
+<body>
+	<div style="width:0; height:0; overflow: hidden;">
+		<img src="static/img/app-icon.png">
+	</div>
+	<div class="page-top">
+		<a class="btn js-refresh float-right"><i class="ficon-refresh"></i></a>
+		<a class="btn js-location"><i class="ficon-location-on"></i></a>
+	</div>
+	<div id="weather_Container"></div>
+	<div id="text_Container" class="text-container">
+		<div class="ani-text-container animation-fade">
+			<span>愿你在最美的年华里</span>
+		</div>
+		<div class="ani-text-container animation-fade after">
+			<span>收获幸福</span>
+		</div>
+		<span style="display:none;">我知道，你若不愿，任何一点都能成为缘由。<br>我不会执念于此。<br>若非要追究，那只能怪我少时不够努力。<br>当下的我，能给的确实不多，而时间对我们彼此都是最宝贵，于你尤是<br>所以，请不要放在心上<br>愿你在最美的年华里，收获幸福。</span>
+		<span style="display:none;">异国秋夜，你望着车窗外的美景<br>又是谁，记下了这动人的一刻</span>
+		<span style="display:none;">送给那位每天醒来先刷墨迹的姑娘</sapn>
+	</div>
+	<div id="copy_right" class="page-bottom"><span>Made for Garfield Bo by EBo</span></div>
+	<script type="text/javascript" src="static/js/zepto.min.js"></script>
+	<script type="text/javascript" src="static/js/code-data.js"></script>
+	<script type="text/javascript" src="static/js/app.js"></script>
+	<script>
+		var weatherBo = new weather("#weather_Container");
+
+		var TIMER = null;
+		var TIMER_MIN = null; 
+		var placeBtn = null;
+		var refreshBtn = null;
+		var updatingClassName = 'animation-rotate';
+		var textArea = null;
+
+		var CALLBACKFUNTION = "setWeatherData";
+
+		var setWeatherData = function(data){
+			console.log(data);
+		};
+
+		var CALLBACKFUNTIONREALTIME = "setRealTimeWeatherData";
+
+		var setRealTimeWeatherData = function(data){
+			weatherBo.updateWeatherData(data);
+			weatherBo.render();
+			updated();
+			if(textArea && !textArea.hasClass('show')){
+				textArea.addClass('show');
+			}
+		};
+
+		var updating = function(){
+			if(refreshBtn){
+				refreshBtn.find('i').addClass(updatingClassName);
+			}
+			TIMER = setTimeout(function(){
+				refreshBtn.find('i').removeClass(updatingClassName);
+			},10000);
+			TIMER_MIN = setTimeout(function(){
+				if(refreshBtn.hasClass('finished')){
+					refreshBtn.find('i').removeClass(updatingClassName);
+					refreshBtn.removeClass('finished');
+					if(TIMER){
+						clearTimeout(TIMER);
+					};
+				}else{
+					refreshBtn.addClass('ok');
+				};
+			},1000);
+		};
+
+		var updated = function(){
+			if(refreshBtn){
+				if(refreshBtn.hasClass('ok')){
+					refreshBtn.find('i').removeClass(updatingClassName);
+					if(TIMER){
+						clearTimeout(TIMER);
+					};
+				}else{
+					refreshBtn.addClass('finished');
+				}
+			}
+		};
+
+		var updateState = function(){
+			if(refreshBtn.find('i').hasClass(updatingClassName)){
+				return true;
+			}else{
+				return false;
+			}
+		};
+
+		var setGeoData = function(data){
+			var _district = data.result.addressComponent.district.replace('区','').replace('县','');
+			var _city = data.result.addressComponent.city.replace('市','');
+			weatherBo.cityCode = getCityCode(_district,_city);
+			getRealTimeWeatherData(getRealTimeWeatherDataUrl,weatherBo.cityCode,CALLBACKFUNTIONREALTIME);
+		};
+
+		var getWeatherDataUrl = "http://cdn.weather.hao.360.cn/api_weather_info.php?app=hao360&code="+ weatherBo.cityCode +"&_jsonp=" + CALLBACKFUNTION + "&callback=?";
+
+		var getClockWeatherDataUrl = "http://weather.hao.360.cn/sed_api_weather_info.php?app=clockWeather&code="+ weatherBo.cityCode +"&_jsonp=" + CALLBACKFUNTIONREALTIME + "&callback=?";
+
+		var getRealTimeWeatherDataUrl = "http://tq.360.cn/api/weatherquery/querys?app=tq360&code=";
+
+		$(document).ready(function() {
+			placeBtn = $('.js-location');
+			refreshBtn = $('.js-refresh');
+			textArea = $('#text_Container');
+
+			getRealTimeWeatherData(getRealTimeWeatherDataUrl,weatherBo.cityCode,CALLBACKFUNTIONREALTIME);
+
+			refreshBtn.click(function(event) {
+				if(updateState()){
+					return;
+				};
+				updating();
+				getRealTimeWeatherData(getRealTimeWeatherDataUrl,weatherBo.cityCode,CALLBACKFUNTIONREALTIME);
+			});
+			placeBtn.click(function(event) {
+				if(updateState()){
+					return;
+				};
+				updating();
+				weatherBo.getPosition();
+			});
+		});
+	</script>
+</body>
+</html>

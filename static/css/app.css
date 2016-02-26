@@ -1,0 +1,416 @@
+html,
+body {
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+body {
+  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 1.4em;
+  background: #09e;
+  color: #FFF;
+  margin: 0 auto;
+  transition: background-color 240ms linear;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+ul {
+  font-size: 14px;
+  margin: 0;
+  padding-left: 0;
+}
+li {
+  list-style: none;
+}
+.weather-container{
+  /*padding: 1vh 1vw;*/
+  text-align: center;
+}
+.text-container{
+  margin-bottom: 2rem;
+  padding: 0.2em 2em;
+  font-size: 1.5em;
+  /*line-height: 1.2;*/
+  line-height: 1;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity 600ms ease, visibility 600ms ease;
+  transition: opacity 600ms ease, visibility 600ms ease;
+}
+.text-container.show{
+  opacity: 1;
+  visibility: visible;
+}
+.weather-title{
+  display: inline-block;
+  margin: 0 1em;
+  border-bottom:1px solid rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.3);
+}
+.weather-body > *{
+  vertical-align: middle;
+}
+.weather-temperature-container{
+  height: 10em;
+  line-height: 10em;
+  text-align: center;
+}
+.weather-temperature-container > * {
+  vertical-align: middle;
+}
+.weather-temperature{
+  font-size: 10em;
+  line-height: 1;
+}
+.temperature-unit{
+  position: absolute;
+  font-size: 2em;
+  line-height: 1.5;
+}
+.weather-temperature-range{
+  font-size: 1.4em;
+}
+.weather-range-unit{
+  font-size: 0.85em;
+  margin-left: 0.2em;
+}
+.weather-icon{
+  display: block;
+  height: 100%;
+  font-size: 5em;
+}
+.weather-icon-container{
+  display: inline-block;
+  height: 5em;
+  width: 5em;
+  text-align: left;
+  vertical-align: top;
+}
+.weather-otherInfo-container{
+  display: inline-block;
+  height: 3em;
+  margin: 0.8em 0 1em;
+  padding-left: 1.5em;
+  padding-right: 0.5em;
+  vertical-align: top;
+  color: rgba(255,255,255,0.9);
+}
+.weather-place{
+  height: 1.5em;
+  line-height: 1.5em;
+  font-weight: bold;
+}
+.weather-date{
+  height: 1.5em;
+  line-height: 1.5em;
+}
+.weather-state-container{
+  padding: 1.4em 1em;
+  text-align: center;
+}
+.weather-state-container > *{
+  vertical-align: middle;
+}
+.weather-state{
+  font-size: 2em;
+  margin-right: 0.4em;
+}
+.weather-expand-item{
+  display: inline-block;
+  padding: 0.2em;
+  margin: 0 0.3em;
+}
+.weather-expand-item > span{
+  line-height: inherit;
+  display: inline-block;
+  padding: 0 0.2em;
+}
+
+.page-top{
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
+.weather-bottom{
+  position: absolute;
+  bottom: 3.5rem;
+  height: 3em;
+  left: 1.5rem;
+  right: 1.5rem;
+  display: -webkit-flex;
+  display: flex;
+}
+.recent-item{
+  position: relative;
+  height: 100%;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  color: rgba(255,255,255,0.3);
+  border-left: 1px solid currentcolor;
+  text-align: center;
+}
+.recent-item:first-child{
+  border-left: none;
+}
+.recent-weather-state{
+  display: inline-block;
+  height: 1.7rem;
+  line-height: 1.7rem;
+  margin-right: 0.1rem;
+  color: rgba(255,255,255,0.8);
+}
+.recent-weather-icon{
+  display: inline-block;
+  height: 1.7rem;
+  width: 1.85rem;
+  font-size: 2em;
+  text-align: left;
+  vertical-align: top;
+}
+.recent-temperature-range{
+  color: rgba(255,255,255,0.8);
+  font-size: 0.8rem;
+}
+.recent-temperature-range:after{
+  content: "\a1";
+  font-family: 'bicon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: top;
+  display: inline-block;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 0.6rem;
+}
+.recent-week{
+  color: rgba(255,255,255,0.8);
+  margin-top: -0.7rem;
+}
+.page-bottom{
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+  height: 2rem;
+  line-height: 2rem;
+  font-size: 0.8rem;
+  color:rgba(255,255,255,0.5);
+}
+.btn{
+  cursor: pointer;
+  padding: 0.4em;
+  line-height: 1em;
+  display: inline-block;
+  height: 1em;
+  text-align: center;
+}
+.float-right{
+  float: right;
+}
+
+.horizontal-borderex{
+  position: relative;
+}
+.horizontal-borderex:before, .horizontal-borderex:after {
+  position: absolute;
+  top: -1px;
+  height: 1px;
+  width: 1em;
+  content: "";
+  background-color: transparent;
+}
+.horizontal-borderex.borderex-position-bottom:before, .horizontal-borderex.borderex-position-bottom:after {
+  top: auto;
+  bottom: -1px;
+}
+.horizontal-borderex:before {
+  left: 0;
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+  background-color: transparent;
+  background-image: -webkit-linear-gradient(left, rgba(255,255,255,0), currentcolor);
+  background-image: linear-gradient(left, rgba(255,255,255,0), currentcolor);
+}
+.horizontal-borderex:after {
+  right: 0;
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+  background-color: transparent;
+  background-image: -webkit-linear-gradient(left, currentcolor, rgba(255,255,255,0));
+  background-image: linear-gradient(left, currentcolor, rgba(255,255,255,0));
+}
+.vertical-borderex:before, .vertical-borderex:after {
+  position: absolute;
+  left: -1px;
+  height: 1em;
+  width: 1px;
+  content: "";
+  background-color: transparent;
+}
+.vertical-borderex.borderex-position-right:before, .vertical-borderex.borderex-position-right:after{
+  left:auto;
+  right: -1px; 
+}
+.vertical-borderex:before {
+  top: 0;
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+  background-color: transparent;
+  background-image: -webkit-linear-gradient(top, rgba(255,255,255,0), currentcolor);
+  background-image: linear-gradient(top, rgba(255,255,255,0), currentcolor);
+}
+.vertical-borderex:after {
+  bottom: 0;
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+  background-color: transparent;
+  background-image: -webkit-linear-gradient(top, currentcolor, rgba(255,255,255,0));
+  background-image: linear-gradient(top, currentcolor, rgba(255,255,255,0));
+}
+
+@-webkit-keyframes 'rotate' {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes 'rotate' {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.animation-rotate {
+  -webkit-animation: rotate 1s linear infinite;
+  animation: rotate 1s linear infinite;
+}
+
+
+@-webkit-keyframes 'fade' {
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes 'fade' {
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes 'fade-after' {
+  0% {
+    opacity: 0;
+  }
+  45% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes 'fade-after' {
+  0% {
+    opacity: 0;
+  }
+  45% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animation-fade {
+  -webkit-animation: fade 20s linear infinite;
+  animation: fade 20s linear infinite;
+}
+.animation-fade.after {
+  -webkit-animation: fade-after 20s linear infinite;
+  animation: fade-after 20s linear infinite;
+}
+
+.ani-text-container{
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.ani-text-container span{
+  font-size: 0.8rem;
+  line-height: 0.8;
+}
+
+/* wechat fix */
+.weather-bottom{
+  left: 5%;
+  right: auto;
+  width: 90%;
+  display: table;
+}
+.recent-item{
+  display: table-cell;
+}
+.recent-temperature-range{
+  margin-bottom: -1rem;
+}
