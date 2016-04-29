@@ -150,8 +150,15 @@ weather.prototype = {
 		var _this = this;
 
 		for(var i = 1; i <= _this.RECENT; i++){
-			var _LT = parseInt(data.weather[i].info['day'][2]);
-			var _HT = parseInt(data.weather[i].info['night'][2]);
+			var _LT = '--';
+			var _HT = '--';
+			if(data.weather[i].info['day']){
+				_LT = parseInt(data.weather[i].info['day'][2]);
+			}
+			if(data.weather[i].info['night']){
+				_HT = parseInt(data.weather[i].info['night'][2]);
+			}
+			
 			if(_LT > _HT){
 				var _tmpT = _LT;
 				_LT = _HT;
@@ -164,7 +171,7 @@ weather.prototype = {
 			_this.recentWeatherData[i-1].date = data.weather[i].date;
 			_this.recentWeatherData[i-1].LTemperature = _LT.toString();
 			_this.recentWeatherData[i-1].HTemperature = _HT.toString();
-			_this.recentWeatherData[i-1].weatherCode = data.weather[i].info['day'][0];
+			_this.recentWeatherData[i-1].weatherCode = data.weather[i].info['day'] ? data.weather[i].info['day'][0] : '0';
 			_this.recentWeatherData[i-1].week = WEEKCODE[_week.toString()][slang];
 		};
 	},
